@@ -8,17 +8,33 @@ var myFeed = app.feed('playground');
 
 myFeed.subscribe({
   onOpen: () => console.log('Connection established'),
-  onItem: item => console.log('Item:', item),
+  onItem: item => {
+  	console.log('Item:', item)
+  	if (item.body.user != "" && item.body.comment != ""){
+  		document.getElementById("error").innerHTML = "";
+	  	var feed = document.getElementById("feed-field");
+	  	feed.innerHTML += "<div class=\"newEntry\"><p><strong>" + item.body.user + ": </strong>";
+	  	feed.innerHTML += item.body.comment + "</p></div>";
+  	} else {
+  		document.getElementById("error").innerHTML = "<p>Are you forgetting something?</p>";
+  	}
+  },
   onError: error => console.error('Error:', error),
 });
 
 // Apend a new item to the feed
-myFeed.append('Hello, world!')
-  .then(response => console.log('Success:', response))
-  .catch(err => console.error('Error:', err));
+var button = document.getElementById("submit-button");
+button.onclick = function() {
+   var user =  document.getElementById("username-field").value;
+   var comment =  document.getElementById("comment-field").value;
+   var post = {"user":user, "comment":comment};
+   
+   // Clear fields
+   document.getElementById("username-field").value = "";
+   document.getElementById("comment-field").value = "";
 
-// You’re not limited to appending string values;
-// you can also append objects, arrays and numbers.
-myFeed.append({ yourKey: 'your value' })
+   // Send Post
+   myFeed.append(post)
   .then(response => console.log('Success:', response))
   .catch(err => console.error('Error:', err));
+}

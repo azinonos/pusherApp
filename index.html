@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Pusher App</title>
+	<title>LonerFeed</title>
+
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link href="https://fonts.googleapis.com/css?family=Lora|Sansita|Open+Sans" rel="stylesheet">
 </head>
 <body>
-	<h1>Pusher App Test</h1>
-	<p>Let's see what the pusher app can do</p>
+	<div id="container">
+		<h1>LonerFeed</h1>
+		<p>This app provides the ability to write different comments (like tweets one could say) under different usernames. This way you are tricked into thinking that you are actually talking to human beings and are not just a loner writing code :P Have a shot!</p>
+		<p>EDIT: Be respectful to yourself and keep the curse words down. You don't want to offend no body.</p>
+
+		<div id="input-fields">
+			<label for="username-field">Username</label>
+			<input id="username-field" type="text">
+			<label for="comment-field">Comment</label>
+			<input id="comment-field" type="text">
+			<input id="submit-button" type="submit"></input>
+			<span id="error"></span>
+		</div>
+
+		<h2>Your Feed:</h2>
+		<div id="feed-field"></div>
+	</div><!-- End of Container -->
 
 	<script src="https://js.pusher.com/platform/latest/pusher-platform.js"></script>
 	<script src="script.js"></script>
